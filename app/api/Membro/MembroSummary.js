@@ -4,7 +4,7 @@ const Membro = require('../Membro/Membro')
 // Mais uma função middleware
 function getSummary(req, res) {
   Membro.aggregate({
-    $project: {dizimo: {$sum: "$dizimos.vl_dizimo"}}
+    $project: {dizimo: {$sum: "$dizimos.valor"}}
   }, {
     $group: {_id: null, dizimo: {$sum: "$dizimo"}}
   }, {
