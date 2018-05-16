@@ -7,18 +7,31 @@ module.exports = function(server) {
   server.use('/api', router)
   router.get('/', (req, res) => res.json({ message: 'Acesso Restrito!' }));
   
-  const AuthService = require('../api/user/AuthService') 
+  //Criando as Rotas
+  const AuthService = require('../api/user/AuthService')
   const CongregacaoService = require('../api/Congregacao/CongregacaoService')
-  const MembroService = require('../api/Membro/MembroService')
+  const CongregacaoCountService = require('../api/congregacao/CongregacaoCount')
   const DepartamentoService = require('../api/Departamento/DepartamentoService')
-  const MembroSummaryService = require('../api/Membro/MembroSummary')
   const EventoService = require('../api/Evento/EventoService')
-  EventoService.register(router,'/evento')
-  CongregacaoService.register(router, '/congregacao')
-  MembroService.register(router,'/membro')
-  DepartamentoService.register(router,'/departamento')
-  router.route('/MembroSummary').get(MembroSummaryService.getSummary)
+  const EventoCountService = require('../api/evento/EventoCount')
+  const MembroService = require('../api/Membro/MembroService')
+  const MembroSummaryService = require('../api/Membro/MembroSummary')
+  const MembroCountService = require('../api/membro/MembroCount')
+  
+  //Serviço de Login
   router.post('/login', AuthService.login)
-  router.post('/signup', AuthService.signup)   
+  router.post('/signup', AuthService.signup)    
+  //Serviços Congregacao
+  CongregacaoService.register(router, '/congregacao')
+  router.post('/CongregacaoByMinisterio', CongregacaoCountService.getCongregacaoByMinisterio)
+  //Serviços Departamento
+  DepartamentoService.register(router,'/departamento')
+  //Serviços Evento
+  EventoService.register(router,'/evento')
+  router.post('/EventoByTipo', EventoCountService.getEventoByTipo)
+  //Serviços Membro
+  MembroService.register(router,'/membro')
+  router.route('/MembroSummary').get(MembroSummaryService.getSummary)
+  router.post('/MembroByType', MembroCountService.getCountMembroByType)
 
 }
