@@ -1,9 +1,9 @@
 const _ = require('lodash')
-const Membro = require('../Membro/Membro')
+const Pessoa = require('../Pessoa/Pessoa')
 
 // Mais uma função middleware
 function getSummary(req, res) {
-  Membro.aggregate({
+  Pessoa.aggregate({
     $project: {dizimo: {$sum: "$dizimos.valor"}}
   }, {
     $group: {_id: null, dizimo: {$sum: "$dizimo"}}

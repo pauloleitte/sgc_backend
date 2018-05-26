@@ -1,10 +1,10 @@
-const Membro = require('./Membro')
+const Pessoa = require('./Pessoa')
 const _ = require('lodash')
 
-Membro.methods(['get', 'post', 'put', 'delete'])
-Membro.updateOptions({new: true, runValidators: true})
+Pessoa.methods(['get', 'post', 'put', 'delete'])
+Pessoa.updateOptions({new: true, runValidators: true})
 
-Membro.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
+Pessoa.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext)
 
 function sendErrorsOrNext(req, res, next) {
   const bundle = res.locals.bundle
@@ -23,8 +23,8 @@ function parseErrors(nodeRestfulErrors){
   return errors
 }
 
-Membro.route('count', function(req, res, next){
-  Membro.count(function(error, value){
+Pessoa.route('count', function(req, res, next){
+  Pessoa.count(function(error, value){
     if (error) {
       res.status(500).json({errors: [error]})
     } else {
@@ -33,4 +33,4 @@ Membro.route('count', function(req, res, next){
   })
 })
 
-module.exports = Membro
+module.exports = Pessoa

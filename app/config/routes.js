@@ -14,9 +14,9 @@ module.exports = function(server) {
   const DepartamentoService = require('../api/Departamento/DepartamentoService')
   const EventoService = require('../api/Evento/EventoService')
   const EventoCountService = require('../api/evento/EventoCount')
-  const MembroService = require('../api/Membro/MembroService')
-  const MembroSummaryService = require('../api/Membro/MembroSummary')
-  const MembroCountService = require('../api/membro/MembroCount')
+  const PessoaService = require('../api/Pessoa/PessoaService')
+  const PessoaSummaryService = require('../api/Pessoa/PessoaSummary')
+  const PessoaCountService = require('../api/Pessoa/PessoaCount')
   
   //Serviço de Login
   router.post('/login', AuthService.login)
@@ -29,9 +29,9 @@ module.exports = function(server) {
   //Serviços Evento
   EventoService.register(router,'/evento')
   router.post('/EventoByTipo', EventoCountService.getEventoByTipo)
-  //Serviços Membro
-  MembroService.register(router,'/membro')
-  router.route('/MembroSummary').get(MembroSummaryService.getSummary)
-  router.post('/MembroByType', MembroCountService.getCountMembroByType)
+  //Serviços Pessoa
+  PessoaService.register(router,'/pessoa')
+  router.route('/PessoaSummary').get(PessoaSummaryService.getSummary)
+  router.post('/PessoaByType', PessoaCountService.getCountMembroByType)
 
 }

@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const Membro = require('../Membro/Membro')
+const Pessoa = require('../Pessoa/Pessoa')
 
 
 const sendErrorsFromDB = (res, dbErrors) => {
@@ -12,7 +12,7 @@ function getCountMembroByType(req,res){
 
     const tipo = req.body.tipo
 
-    Membro.count({tipo: tipo}, function(err, result) {
+    Pessoa.count({tipo: tipo}, function(err, result) {
         if(err){
             return sendErrorsFromDB(res, err)
         }

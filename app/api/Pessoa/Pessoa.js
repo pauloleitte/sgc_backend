@@ -1,14 +1,19 @@
 const restful = require('node-restful')
 const mongoose = restful.mongoose
 
-const membroFinanceiro = new mongoose.Schema({
+const PessoaFinanceiro = new mongoose.Schema({
 	valor: { type: Number, min: 0, required: false },
 	data_pagamento: { type: String, required: false }
 })
 
-const membroSchema = new mongoose.Schema({
+const pessoaSchema = new mongoose.Schema({
 
 	nome: { type: String, required: true },
+	telefone: { type: String, required: false },
+	email: { type: String, required: false },
+	dataNascimento: { type: String, required: true },
+	sexo: { type: String, required: true },
+	estado_civil: { type: String, required: true },
 	rua: { type: String, required: true },
 	complemento: { type: String, required: false },
 	numero: { type: String, required: false },
@@ -16,14 +21,9 @@ const membroSchema = new mongoose.Schema({
 	cidade: { type: String, required: false },
 	estado: { type: String, required: false },
 	cep: { type: String, required: false },
-	telefone: { type: String, required: false },
-	email: { type: String, required: false },
-	dataNascimento: { type: String, required: true },
-	sexo: { type: String, required: true },
-	estado_civil: { type: String, required: true },
 	tipo: { type: String, required: false },
 	atualizacao: { type: Date, default: Date.now },
-	dizimos: [membroFinanceiro]
+	dizimos: [PessoaFinanceiro]
 })
 
-module.exports = restful.model('Membro', membroSchema)
+module.exports = restful.model('Pessoa', pessoaSchema)
